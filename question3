@@ -1,0 +1,36 @@
+package dairy;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Dairy {
+    public void writeNote(String fileName, String note) {
+        try {
+            FileWriter fileWriter = new FileWriter("my_dairy.txt", true);
+            fileWriter.write(note + "\n");
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Error : ");
+        }
+    }
+
+    public void createBackup(String sourceFile, String backupFile) {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(sourceFile));
+            FileWriter fileWriter = new FileWriter(backupFile);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                fileWriter.write(line + "\n");
+            }
+
+            bufferedReader.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Could not create backup.");
+
+
+        };
+    }
+}
